@@ -1,144 +1,816 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+/* Sansation Font Family - Local WOFF & Webfont Support */
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    local("Sansation"),
+    local("Sansation Regular"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/0abb75ff-f342-4a5d-bdd6-ead480f5156e/Sansation-Light.woff")
+      format("woff");
 }
 
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Sansation"),
+    local("Sansation Regular"),
+    local("Sansation_Regular"),
+    local("Sansation-Regular"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/cdfed179-f488-4b16-812d-f0227ae401ce/Sansation-Regular.woff")
+      format("woff");
 }
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+@font-face {
+  font-family: "Sansation";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Sansation Italic"),
+    local("Sansation-Italic"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/cbf1ba6e-beb7-45e7-9d38-7d2073193d6a/Sansation-Italic.woff")
+      format("woff");
 }
 
-@layer base {
-  * {
-    border-color: var(--color-border);
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    local("Sansation Bold"),
+    local("Sansation_Bold"),
+    local("Sansation-Bold"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/76835a91-95be-4627-8da1-747c653a0311/Sansation-Bold.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src:
+    local("Sansation Bold"),
+    local("Sansation_Bold"),
+    local("Sansation-Bold"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/76835a91-95be-4627-8da1-747c653a0311/Sansation-Bold.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("Sansation Bold"),
+    local("Sansation_Bold"),
+    local("Sansation-Bold"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/76835a91-95be-4627-8da1-747c653a0311/Sansation-Bold.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src:
+    local("Sansation Bold"),
+    local("Sansation_Bold"),
+    local("Sansation-Bold"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/76835a91-95be-4627-8da1-747c653a0311/Sansation-Bold.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src:
+    local("Sansation Bold"),
+    local("Sansation_Bold"),
+    local("Sansation-Bold"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/76835a91-95be-4627-8da1-747c653a0311/Sansation-Bold.woff")
+      format("woff");
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("Sansation Bold Italic"),
+    local("Sansation-BoldItalic"),
+    url("https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/f1d70b61-6f4f-49d1-9ea7-a9281aab6b94/Sansation-BoldItalic.woff")
+      format("woff");
+}
+
+@theme {
+  --font-sans:
+    "Sansation", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display:
+    "Sansation", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-brand-blue: #0b2545;
+  --color-brand-blue-dark: #081b33;
+  --color-brand-blue-light: #133966;
+
+  --color-brand-red: #8b1e1e;
+  --color-brand-red-dark: #731717;
+  --color-brand-red-light: #a32626;
+
+  --color-brand-cream: #faf8f5;
+  --color-brand-cream-muted: #f3efe6;
+  --color-brand-cream-border: #e8e1d3;
+
+  --color-brand-gold: #f5b301;
+}
+
+/* Global Font & Crisp Text Smoothing - Sansation Font Family */
+html,
+body {
+  font-family:
+    "Sansation",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color: #0b2545;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+select,
+textarea,
+p,
+span,
+a,
+label,
+li {
+  font-family:
+    "Sansation",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* High contrast readability enhancement: eliminates washed out text.
+   Scoped to paragraphs without an explicit text color class so hero,
+   testimonial and other light-on-dark text utilities keep their color. */
+p:not([class*="text-"]) {
+  color: #0b2545;
+}
+
+/* Ensure strong contrast across common muted text classes */
+.text-\[\#0B2545\]\/60 {
+  color: rgba(11, 37, 69, 0.88) !important;
+}
+.text-\[\#0B2545\]\/70 {
+  color: rgba(11, 37, 69, 0.92) !important;
+}
+.text-\[\#0B2545\]\/75 {
+  color: rgba(11, 37, 69, 0.94) !important;
+}
+.text-\[\#0B2545\]\/80 {
+  color: rgba(11, 37, 69, 0.96) !important;
+}
+
+/* Subtle engineering blueprint pattern */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(11, 37, 69, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 37, 69, 0.04) 1px, transparent 1px);
+}
+
+/* Left-to-right entrance animation for main headings - exact match with hero section */
+@keyframes slideLeftToRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-120px);
+    filter: blur(4px);
+  }
+  28% {
+    opacity: 0.92;
+    transform: translateX(-40px);
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* Heading section title entrance from left */
+@keyframes headingSlideLTR {
+  0% {
+    opacity: 0;
+    transform: translateX(-120px);
+    filter: blur(4px);
+  }
+  28% {
+    opacity: 0.92;
+    transform: translateX(-40px);
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* Card entrance animations */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Shimmer animation across 2-color brand line */
+@keyframes shimmerLine {
+  0% {
+    transform: translateX(-150%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+/* Card scroll-reveal and slide up from bottom */
+@keyframes scrollBoxUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(2px);
+  }
+  32% {
+    opacity: 0.92;
+    transform: translateY(16px);
+    filter: blur(0.3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes floatElement {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes floatElementSlow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.4deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 30, 30, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(139, 30, 30, 0);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(139, 30, 30, 0.5);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(139, 30, 30, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(139, 30, 30, 0);
+  }
+}
+
+/* Continuous 2-Color Flowing Gradient Scroll Animation for Main Heading Lines */
+@keyframes colorFlowScroll {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-color-scroll {
+  background: linear-gradient(
+    90deg,
+    #0b2545 0%,
+    #8b1e1e 25%,
+    #0b2545 50%,
+    #8b1e1e 75%,
+    #0b2545 100%
+  );
+  background-size: 200% 100%;
+  animation: colorFlowScroll 2.8s linear infinite;
+}
+
+/* All main headings slide from Left to Right */
+.animate-heading-side {
+  animation: slideLeftToRight 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity, filter;
+}
+
+.animate-shimmer {
+  animation: shimmerLine 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-float {
+  animation: floatElement 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatElementSlow 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Box scroll up entry: sections & cards sliding up on scroll */
+.box-scroll-up {
+  animation: scrollBoxUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Global Interactive Image Zoom In / Zoom Out on Cursor Hover */
+.img-zoom-hover {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.img-zoom-hover:hover {
+  transform: scale(1.08);
+}
+
+/* Card hover elevation: box moves upward on hover */
+.card-hover-elevate {
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease;
+  will-change: transform, box-shadow;
+}
+
+.card-hover-elevate:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 22px 30px -8px rgba(11, 37, 69, 0.14),
+    0 8px 12px -4px rgba(139, 30, 30, 0.08);
+  border-color: rgba(139, 30, 30, 0.35);
+}
+
+/* Smooth entrance animations for boxes and cards */
+@keyframes fadeInUpSmooth {
+  0% {
+    opacity: 0.95;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeftSmooth {
+  0% {
+    opacity: 0.95;
+    transform: translateX(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRightSmooth {
+  0% {
+    opacity: 0.95;
+    transform: translateX(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Font utility for brand logo */
+.font-sansation {
+  font-family: "Sansation", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Scroll Reveal Classes - Content visible by default per progressive enhancement rules */
+.scroll-reveal,
+.scroll-reveal-left,
+.scroll-reveal-right,
+.scroll-reveal-scale,
+.box-scroll-reveal,
+.section-heading-ltr,
+.heading-ltr,
+.heading-scroll-reveal h2,
+.heading-scroll-reveal span,
+.heading-scroll-reveal p,
+.section-line-expand {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Staggered transition delay classes */
+.delay-1 {
+  transition-delay: 80ms;
+}
+.delay-2 {
+  transition-delay: 160ms;
+}
+.delay-3 {
+  transition-delay: 240ms;
+}
+.delay-4 {
+  transition-delay: 320ms;
+}
+.delay-5 {
+  transition-delay: 400ms;
+}
+
+/* Staggered delay utility classes for multi-card grids */
+.delay-100 {
+  animation-delay: 80ms;
+  transition-delay: 80ms;
+}
+.delay-150 {
+  animation-delay: 120ms;
+  transition-delay: 120ms;
+}
+.delay-200 {
+  animation-delay: 160ms;
+  transition-delay: 160ms;
+}
+.delay-250 {
+  animation-delay: 200ms;
+  transition-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 240ms;
+  transition-delay: 240ms;
+}
+.delay-400 {
+  animation-delay: 320ms;
+  transition-delay: 320ms;
+}
+
+
+/* Smooth fade-in-scale for interactive cards / modals */
+@keyframes fadeInUpScale {
+  0% {
+    opacity: 0.95;
+    transform: translateY(8px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInUpScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Subtle magnetic button lift with soft glow on active interactive elements */
+.btn-magnetic {
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s ease;
+}
+
+.btn-magnetic:hover {
+  transform: translateY(-2px);
+}
+
+.btn-magnetic:active {
+  transform: translateY(0);
+}
+
+/* Horizontal scroll styling */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Visible custom scrollbar for horizontal steps */
+.steps-horizontal-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+.steps-horizontal-scrollbar::-webkit-scrollbar-track {
+  background: #e8e1d3;
+  border-radius: 9999px;
+}
+.steps-horizontal-scrollbar::-webkit-scrollbar-thumb {
+  background: #8b1e1e;
+  border-radius: 9999px;
+}
+.steps-horizontal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #731717;
+}
+.steps-horizontal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #8b1e1e #e8e1d3;
+}
+
+/* Hero background image presentation - stable and crisp */
+.animate-hero-video-zoom {
+  transform: none;
+}
+
+/* Page fade-in-up animation for smooth route transitions */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0.98;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: pageFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Enhanced smooth hover response for all interactive action buttons */
+button:not(:disabled) {
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+button:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* Shimmer sweep on cards on hover */
+.card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.card-shimmer:hover::before {
+  left: 200%;
+  transition: left 0.85s ease-in-out;
+}
+
+/* Subtle button glow pulse for prominent call-to-action */
+@keyframes buttonGlowPulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 14px 0 rgba(139, 30, 30, 0.35);
+  }
+  50% {
+    box-shadow: 0 6px 24px 4px rgba(139, 30, 30, 0.55);
+  }
+}
+
+.animate-btn-glow {
+  animation: buttonGlowPulse 3s ease-in-out infinite;
+}
+
+/* Subtle gentle floating animation */
+@keyframes floatSubtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float-subtle {
+  animation: floatSubtle 3.5s ease-in-out infinite;
+}
+
+/* Content-first motion: no section depends on JavaScript to become readable.
+   Entrances are applied once on intersection by website-motion, including late-mounted tabs. */
+.scroll-reveal,
+.scroll-reveal-left,
+.scroll-reveal-right,
+.scroll-reveal-scale,
+.box-scroll-reveal,
+.heading-scroll-reveal h2,
+.heading-scroll-reveal .section-heading-ltr,
+.section-heading-ltr,
+.heading-ltr,
+.heading-scroll-reveal span,
+.heading-scroll-reveal p,
+.section-line-expand {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  will-change: auto;
+}
+
+/* Main Headings Left-to-Right Entrance - Exact match with home hero section */
+.heading-scroll-reveal.is-visible h2,
+.heading-scroll-reveal.is-visible .section-heading-ltr,
+.section-heading-ltr.is-visible,
+.heading-ltr.is-visible,
+.is-visible .section-heading-ltr,
+.is-visible.animate-heading-side,
+h2.is-visible,
+h3.is-visible,
+main h2.animate-heading-side.is-visible,
+main h3.animate-heading-side.is-visible {
+  animation: page-headline-ltr 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 2-Color Accent Line expands horizontally Left to Right under heading */
+.heading-scroll-reveal.is-visible .section-line-expand,
+.section-line-expand.is-visible {
+  transform-origin: left center;
+  animation: lineExpandLTR 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+@keyframes lineExpandLTR {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Sections and Cards slide UP on scroll */
+.box-scroll-reveal.is-visible,
+.card-hover-elevate.is-visible,
+.scroll-reveal-scale.is-visible,
+.scroll-reveal.is-visible,
+.scroll-reveal-up.is-visible,
+.scroll-counter.is-visible {
+  animation: sectionSlideUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes sectionSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(55px);
+    filter: blur(2px);
+  }
+  35% {
+    opacity: 0.92;
+    transform: translateY(14px);
+    filter: blur(0.3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Columns and images remain stable without sideways displacement on scroll */
+.scroll-reveal-left.is-visible,
+.scroll-reveal-right.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Page headline slides in left-to-right from first paint (CSS only, always ends visible). */
+@keyframes page-headline-ltr {
+  0% {
+    opacity: 0;
+    transform: translateX(-120px);
+    filter: blur(4px);
+  }
+  28% {
+    opacity: 0.92;
+    transform: translateX(-40px);
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+main h1 {
+  animation: page-headline-ltr 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main h1 {
+    animation-name: page-headline-fade;
+    animation-duration: 0.7s;
+  }
+}
+
+@keyframes page-headline-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+  .img-zoom-hover:hover,
+  .card-hover-elevate:hover,
+  .btn-magnetic:hover,
+  button:not(:disabled):active {
+    transform: none;
   }
 }

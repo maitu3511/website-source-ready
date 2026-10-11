@@ -12,4 +12,15 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // External hosting (Netlify) needs the Netlify server preset; Lovable's own
+  // build environment ignores the preset. renderer:false stops Nitro from serving
+  // the legacy root index.html (which loads a non-existent /src/main.tsx) as every page.
+  nitro: { preset: "netlify", ...({ renderer: false } as object) },
+  vite: {
+    server: {
+      host: "0.0.0.0",
+      port: 3000,
+      allowedHosts: true,
+    },
+  },
 });

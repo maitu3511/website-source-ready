@@ -1,24 +1,61 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HomePage } from "../content/HomePage";
+import { useWebsiteActions } from "../lib/website-navigation";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Advay Engineers – Plastic Injection Moulds & Engineering Components" },
+      {
+        name: "description",
+        content:
+          "Manufacturer of precision plastic injection moulds, engineering plastic components & OEM manufacturing solutions in Rajkot, Gujarat. In-house Haas VMC toolroom.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Plastic Injection Moulds, Engineering Plastic Components, OEM Manufacturing, Toolroom Rajkot, Haas VMC Machining, Gujarat Mould Maker, Precision Tooling India, Veraval Shapar Rajkot",
+      },
+      { property: "og:site_name", content: "Advay Engineers" },
+      {
+        property: "og:title",
+        content: "Advay Engineers – Plastic Injection Moulds & Engineering Components",
+      },
+      {
+        property: "og:description",
+        content:
+          "Manufacturer of precision plastic injection moulds, engineering plastic components & OEM manufacturing solutions in Rajkot, Gujarat. In-house Haas VMC toolroom.",
+      },
+      { property: "og:type", content: "website" },
+      {
+        property: "og:image",
+        content:
+          "https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/f8a846b8-b107-4d85-9641-31b8a5988ca3/hero-machine-working.jpg",
+      },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "Advay Engineers – Plastic Injection Moulds & Engineering Components",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Manufacturer of precision plastic injection moulds, engineering plastic components & OEM manufacturing solutions in Rajkot, Gujarat. In-house Haas VMC toolroom.",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://id-preview--7812fedb-978a-4d3f-b7af-27b541ebd405.lovable.app/__l5e/assets-v1/f8a846b8-b107-4d85-9641-31b8a5988ca3/hero-machine-working.jpg",
+      },
+    ],
+    links: [{ rel: "canonical", href: "https://advayengineers.com/" }],
+  }),
+  component: Page,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+function Page() {
+  const actions = useWebsiteActions();
+  return <HomePage {...actions} />;
 }
