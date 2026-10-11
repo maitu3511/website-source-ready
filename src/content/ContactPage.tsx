@@ -88,7 +88,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-[#0B2545]">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80"
+            src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=80"
             alt="Contact Advay Engineers"
             loading="eager"
             decoding="sync"

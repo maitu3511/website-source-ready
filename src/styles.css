@@ -394,14 +394,35 @@ p:not([class*="text-"]) {
   animation: scrollBoxUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Global Interactive Image Zoom In / Zoom Out on Cursor Hover */
+/* Global Interactive Image Zoom In / Zoom Out on Cursor Hover + slow video-like breathing zoom */
+@keyframes imgVideoZoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .img-zoom-hover {
+  animation: imgVideoZoom 16s ease-in-out infinite;
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 
 .img-zoom-hover:hover {
+  animation-play-state: paused;
   transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img-zoom-hover {
+    animation: none;
+    transform: none;
+  }
 }
 
 /* Card hover elevation: box moves upward on hover */
