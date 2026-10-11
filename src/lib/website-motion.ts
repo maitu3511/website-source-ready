@@ -85,16 +85,18 @@ export function installWebsiteMotion(root: HTMLElement): () => void {
         ".box-scroll-reveal, .card-hover-elevate, .scroll-reveal-up, [data-card]"
       )
     ) {
-      // Cards and sections slide UP from below on scroll as requested
-      keyframes = [
-        { opacity: 0, transform: "translateY(28px)" },
-        { opacity: 1, transform: "translateY(0)" },
-      ];
+      // Cards slide in from LEFT or RIGHT (alternating by sibling position)
       const siblings = element.parentElement?.querySelectorAll(
-        ":scope > .box-scroll-reveal, :scope > .card-hover-elevate, :scope > .scroll-reveal-up"
+        ":scope > .box-scroll-reveal, :scope > .card-hover-elevate, :scope > .scroll-reveal-up, :scope > [data-card]"
       );
+      const index = siblings ? Array.from(siblings).indexOf(element) : 0;
+      const fromLeft = index % 2 === 0;
+      keyframes = [
+        { opacity: 0, transform: `translateX(${fromLeft ? "-48px" : "48px"})` },
+        { opacity: 1, transform: "translateX(0)" },
+      ];
       if (siblings && siblings.length > 1) {
-        delay = Math.min(Array.from(siblings).indexOf(element) * 70, 350);
+        delay = Math.min(index * 70, 350);
       } else {
         delay = 60;
       }
@@ -106,10 +108,10 @@ export function installWebsiteMotion(root: HTMLElement): () => void {
       ];
       delay = 80;
     } else {
-      // Default: smooth subtle rise up from below
+      // Default: smooth Left-to-Right slide-in across the whole website
       keyframes = [
-        { opacity: 0, transform: "translateY(24px)" },
-        { opacity: 1, transform: "translateY(0)" },
+        { opacity: 0, transform: "translateX(-36px)" },
+        { opacity: 1, transform: "translateX(0)" },
       ];
       delay = 40;
     }
