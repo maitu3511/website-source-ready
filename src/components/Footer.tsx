@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuote }) => {
     <footer className="bg-[#FAF8F5] text-[#0B2545] border-t border-[#E8E1D3] pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 4-column footer layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[minmax(340px,1.4fr)_1fr_1.15fr_1.1fr] gap-12 mb-16">
           {/* Col 1: Brand, Tagline & Description */}
           <div>
             <Link

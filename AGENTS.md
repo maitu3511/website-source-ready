@@ -18,3 +18,4 @@
 - Resolve page, logo, and font assets directly to absolute public CDN URLs from the imported asset manifest; external hosts do not provide Lovable-relative proxies or the app's media redirects.
 - Build with Nitro preset "netlify" and renderer disabled for external hosting; otherwise Nitro serves the legacy root index.html as every page and the site is blank.
 - Keep scroll entrances in the shared website-motion enhancement with content visible by default and late-mounted elements observed; animation registration must never determine content availability.
+- Mark any region whose content must appear without motion with `data-motion-static`; the shared website-motion enhancement skips those subtrees, so per-page motion opt-outs stay in one place instead of scattered guards.

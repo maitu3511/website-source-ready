@@ -1,6 +1,9 @@
 const revealSelector =
   "h1, h2, h3, .section-heading-ltr, .heading-ltr, .animate-heading-side, .section-line-expand, .heading-scroll-reveal, .heading-scroll-reveal > span, .heading-scroll-reveal > p, .scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale, .scroll-reveal-up, .box-scroll-reveal, .card-hover-elevate, .scroll-counter";
 
+// Regions marked with this attribute keep their content exactly as authored: no motion at all.
+const motionStaticSelector = "[data-motion-static]";
+
 /** Progressive enhancement: content stays readable even without observers or animation APIs. */
 export function installWebsiteMotion(root: HTMLElement): () => void {
   const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -15,6 +18,7 @@ export function installWebsiteMotion(root: HTMLElement): () => void {
     if (!(element instanceof HTMLElement)) return;
     if (animatedSet.has(element)) return;
     animatedSet.add(element);
+    if (element.closest(motionStaticSelector)) return;
 
     element.classList.add("is-visible");
 
@@ -175,6 +179,7 @@ export function installWebsiteMotion(root: HTMLElement): () => void {
   const register = () => {
     root.querySelectorAll(revealSelector).forEach((element) => {
       if (registered.has(element)) return;
+      if (element.closest(motionStaticSelector)) return;
       registered.add(element);
       intersection?.observe(element);
     });
