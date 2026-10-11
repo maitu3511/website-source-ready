@@ -582,9 +582,29 @@ p:not([class*="text-"]) {
   scrollbar-color: #8b1e1e #e8e1d3;
 }
 
-/* Hero background image presentation - stable and crisp */
+/* Hero background image presentation - slow video-like zoom in / zoom out (Ken Burns) */
+@keyframes heroVideoZoom {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.09) translateY(-1.2%);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
 .animate-hero-video-zoom {
-  transform: none;
+  animation: heroVideoZoom 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-video-zoom {
+    animation: none;
+    transform: none;
+  }
 }
 
 /* Page fade-in-up animation for smooth route transitions */
