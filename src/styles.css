@@ -521,11 +521,11 @@ p:not([class*="text-"]) {
 }
 
 
-/* Smooth fade-in-scale for interactive cards / modals */
+/* Smooth fade-in-scale for interactive cards / modals — gentle zoom + rise, no sideways slide */
 @keyframes fadeInUpScale {
   0% {
-    opacity: 0.95;
-    transform: translateY(8px) scale(0.99);
+    opacity: 0;
+    transform: translateY(18px) scale(0.965);
   }
   100% {
     opacity: 1;
@@ -534,7 +534,7 @@ p:not([class*="text-"]) {
 }
 
 .animate-fade-in-scale {
-  animation: fadeInUpScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeInUpScale 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Subtle magnetic button lift with soft glow on active interactive elements */
