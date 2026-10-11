@@ -415,7 +415,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuote }) =
           </div>
 
           {/* Interactive Stage Detail Box */}
-          <div className="rounded-3xl border border-[#E8E1D3] bg-[#FAF8F5] p-6 sm:p-10 shadow-lg overflow-hidden">
+          <div
+            data-motion-static
+            className="rounded-3xl border border-[#E8E1D3] bg-[#FAF8F5] p-6 sm:p-10 shadow-lg overflow-hidden"
+          >
             <div
               key={activeProcessStep}
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center animate-fade-in-scale"
@@ -429,9 +432,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuote }) =
                   {activeProcess.title}
                 </h3>
 
-                <div className="relative w-24 h-1 rounded-full overflow-hidden animate-color-scroll">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent animate-shimmer" />
-                </div>
+                <div className="w-24 h-1 rounded-full bg-gradient-to-r from-[#0B2545] to-[#8B1E1E]" />
 
                 <p className="text-base text-slate-800 leading-relaxed font-normal">
                   {activeProcess.details || activeProcess.description}
