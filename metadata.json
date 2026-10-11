@@ -1,0 +1,6 @@
+{
+  "name": "Advay Engineers",
+  "description": "Manufacturer of high-precision plastic injection moulds and engineering plastic components in Rajkot, Gujarat.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
