@@ -121,7 +121,7 @@ export const TestimonialsSection: React.FC = () => {
         <img
           src={COMPANY_INFO.images.reviewsFactory}
           alt="Advay Engineers Manufacturing Shopfloor"
-          className="w-full h-full object-cover object-center filter brightness-95 contrast-105"
+          className="w-full h-full object-cover object-center filter brightness-95 contrast-105 animate-hero-video-zoom"
           referrerPolicy="no-referrer"
         />
         {/* Darker balanced scrim so background is visible while review card is 100% legible */}
