@@ -4,6 +4,7 @@ import { COMPANY_INFO } from "../data/companyData";
 import { ReadyForProductionSection } from "../components/ReadyForProductionSection";
 import { Phone, Mail, MapPin, Send, CheckCircle2, ArrowUpRight } from "lucide-react";
 import { WhatsAppIcon } from "../components/WhatsAppIcon";
+import contactHeroImg from "../assets/contact-hero.jpg";
 
 interface ContactPageProps {
   onNavigate: (page: PageId) => void;
@@ -88,7 +89,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-[#0B2545]">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=80"
+            src={contactHeroImg}
             alt="Contact Advay Engineers"
             loading="eager"
             decoding="sync"
